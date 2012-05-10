@@ -19,8 +19,15 @@ do
     echo; echo
 done
 
-echo "Re-testing installation of $module"
+echo "Re-testing $module for perlbrew Perl installations"
 perlbrew exec perl -e "use $module; print $]"
+
+perlbrew switch-off
+echo "Installing $module for native Perl installation"
+cpanm --sudo $module
+echo "Testing installation of $module"
+perl -e "use $module; print $]"
+echo; echo
 
 echo "Switching back to $current"
 perlbrew switch $current
